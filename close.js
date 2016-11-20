@@ -26,7 +26,7 @@ function CloseWebPage() {
     }
 }
 
-//      <!-- 2.判断--移动终端浏览器版本信息   -->
+//      <!-- 2.判断--移动终端浏览器版本信息   taobao.js-->
 function parseUA() {
     var u = navigator.userAgent;
     var u2 = navigator.userAgent.toLowerCase();
@@ -73,3 +73,38 @@ function isWeiXin(){
         return false;
     }
 }
+
+
+// 尽在wcg Apple APP 下
+var uaString = navigator.userAgent;
+var ownBrowser = [[/(WcgA.*?)\/([\w\.]+)/i], [UAParser.BROWSER.NAME, UAParser.BROWSER.VERSION]];
+var parser = new UAParser(uaString, {browser: ownBrowser});
+var browserName = parser.getBrowser().name;
+
+if(!!browserName) {
+    if(browserName==='WcgApple') {
+        $('#footer-load').hide();
+    }
+}
+
+var uaString = navigator.userAgent;
+var ownBrowser = [[/(WcgA.*?)\/([\w\.]+)/i], [UAParser.BROWSER.NAME, UAParser.BROWSER.VERSION]];
+var parser = new UAParser(uaString, {browser: ownBrowser});
+var browserName = parser.getBrowser().name.toLowerCase();
+
+var isLogin=$('#isLogin').val();
+$('.btn-box').on('click',function(){
+    if(isLogin==0){
+        var from = encodeURIComponent('/zhuanti/index?id=3');
+        location.href='/user/login?from='+from+'&appparams=dmlld3R5cGU9bG9naW4mbmVlZGxvZ2luPXllcyZzdWNjZXNzdXJsPWh0dHBzJTNBJTJGJTJGbS53YW5nY2FpZ3UuY29tJTJGemh1YW50aSUyRmluZGV4JTNGaWQlM0Qz';
+    }else if(isLogin==1){
+        if(!!browserName) {
+            if(browserName==='wcgapple' || browserName==='wcgandroid') {
+                location.href = '/zhuanti/index?id=3&appparams=dmlld3R5cGU9bXlpbnZpdGUmbmVlZGxvZ2luPXllcw==';
+            }else {
+                $('.mark-box').fadeIn();
+                $('.share-box').fadeIn();
+            }
+        }
+    }
+})
