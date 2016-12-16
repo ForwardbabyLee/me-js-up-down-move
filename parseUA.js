@@ -26,16 +26,17 @@ function CloseWebPage() {
     }
 }
 
-//      <!-- 2.判断--移动终端浏览器版本信息   taobao.js-->
+//      <!-- 2.判断--移动终端浏览器版本信息   -->
 function parseUA() {
     var u = navigator.userAgent;
     var u2 = navigator.userAgent.toLowerCase();
     return { //移动终端浏览器版本信息
+        //PC
         trident: u.indexOf('Trident') > -1, //IE内核
         presto: u.indexOf('Presto') > -1, //opera内核
         webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
         gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-
+        //终端
         mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
         ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
 
@@ -45,7 +46,16 @@ function parseUA() {
         webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
         iosv: u.substr(u.indexOf('iPhone OS') + 9, 3),
         weixin: u2.match(/MicroMessenger/i) == "micromessenger",//微信浏览器
-        ali: u.indexOf('AliApp') > -1
+        ali: u.indexOf('AliApp') > -1, //阿里的软件
+        qq: u2.indexOf('qqbrowser') > -1,//的软件 
+        //qq2: u2.match(/QQ/i) == 'qq',   //qq内置浏览器
+        qq2: u2.match(/MQQbrowser/i) == 'qq',   //qq内置浏览器
+        e360e: u2.indexOf('360ee') > -1, 
+        s360e: u2.indexOf('360se') > -1, 
+        aoyou: u2.indexOf('aoyou') > -1, 
+        baidu: u2.indexOf('baidu') > -1 ,
+        wcgiphone: u.indexOf('WcgApple') > -1,//iphone wcg app
+        wcgandroid: u.indexOf('wcgAndroid') > -1//android wcg app
     };
 }
 var ua = parseUA();
@@ -74,23 +84,6 @@ function isWeiXin(){
     }
 }
 
-
-// 尽在wcg Apple APP 下
-var uaString = navigator.userAgent;
-var ownBrowser = [[/(WcgA.*?)\/([\w\.]+)/i], [UAParser.BROWSER.NAME, UAParser.BROWSER.VERSION]];
-var parser = new UAParser(uaString, {browser: ownBrowser});
-var browserName = parser.getBrowser().name;
-
-if(!!browserName) {
-    if(browserName==='WcgApple') {
-        $('#footer-load').hide();
-    }
-}
-
-var uaString = navigator.userAgent;
-var ownBrowser = [[/(WcgA.*?)\/([\w\.]+)/i], [UAParser.BROWSER.NAME, UAParser.BROWSER.VERSION]];
-var parser = new UAParser(uaString, {browser: ownBrowser});
-var browserName = parser.getBrowser().name.toLowerCase();
 
 var isLogin=$('#isLogin').val();
 $('.btn-box').on('click',function(){
