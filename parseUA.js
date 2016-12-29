@@ -82,6 +82,7 @@ function isWeiXin(){
     }else{
         return false;
     }
+<<<<<<< HEAD:parseUA.js
 }
 
 
@@ -101,3 +102,6 @@ $('.btn-box').on('click',function(){
         }
     }
 })
+=======
+}
+>>>>>>> parent of cf51102... js 收集:close.js
